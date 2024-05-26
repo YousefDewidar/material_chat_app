@@ -16,7 +16,7 @@ class _AllViewsState extends State<AllViews> {
   int curIndex = 0;
 
   @override
-  Widget build(BuildContext  )  {
+  Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
         controller: pageController,
