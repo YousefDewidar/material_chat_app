@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_chat_app/views/chat/in_chat_view.dart';
 import 'package:material_chat_app/views/login_view.dart';
 
 void main() {
@@ -18,7 +19,7 @@ class ChatApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
       ),
-      home: const LoginView(),
+      home: const InChatView(),
     );
   }
 }
