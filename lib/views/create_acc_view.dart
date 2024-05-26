@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_chat_app/views/all_views.dart';
 import 'package:material_chat_app/widgets/custom_button.dart';
 import 'package:material_chat_app/widgets/custom_text_field.dart';
 
@@ -59,7 +60,14 @@ class CreateAccView extends StatelessWidget {
                 height: 20,
               ),
 
-              CustomButton(text: 'continuo', onPressed: () {})
+              CustomButton(
+                  text: 'continuo',
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return const AllViews();
+                    }));
+                  })
             ],
           ),
         ),
