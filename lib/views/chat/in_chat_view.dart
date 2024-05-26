@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:material_chat_app/views/chat/widgets/message_card.dart';
+import 'package:material_chat_app/views/chat/widgets/say_hi_view.dart';
 import 'package:material_chat_app/views/chat/widgets/send_message.dart';
 
 class InChatView extends StatefulWidget {
@@ -39,6 +38,7 @@ class _InChatViewState extends State<InChatView> {
         child: Column(
           children: [
             // messages
+
             Expanded(
               child: ListView.builder(
                 reverse: true,
