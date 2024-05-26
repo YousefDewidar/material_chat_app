@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:material_chat_app/views/chat/widgets/message_card.dart';
-import 'package:material_chat_app/views/chat/widgets/say_hi_view.dart';
 import 'package:material_chat_app/views/chat/widgets/send_message.dart';
 
 class InChatView extends StatefulWidget {
