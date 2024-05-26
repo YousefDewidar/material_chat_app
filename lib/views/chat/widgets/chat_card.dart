@@ -8,15 +8,18 @@ class ChatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Card(
-      child: ListTile(
-        leading: CircleAvatar(),
-        title: Text('Name'),
-        subtitle: Text('Last message'),
-        trailing: Badge(
-          label: Text('5'),
-          padding: EdgeInsets.symmetric(horizontal: 10),
-          largeSize: 30,
+    return GestureDetector(
+      onTap: (){},
+      child: const Card(
+        child: ListTile(
+          leading: CircleAvatar(),
+          title: Text('Name'),
+          subtitle: Text('Last message'),
+          trailing: Badge(
+            label: Text('5'),
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            largeSize: 30,
+          ),
         ),
       ),
     );
