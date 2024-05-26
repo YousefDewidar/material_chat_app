@@ -20,6 +20,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty && widget.label == 'Email') {
+          return 'Please enter your email';
+        } else if (value.isEmpty && widget.label == 'Password') {
+          return 'Please enter your password';
+        } else {
+          return null;
+        }
+      },
       obscureText: widget.label == "Email" ? false : !isVisable,
       decoration: InputDecoration(
           prefixIcon: Icon(widget.icon),
