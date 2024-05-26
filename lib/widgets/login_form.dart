@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_chat_app/views/create_acc_view.dart';
 import 'package:material_chat_app/widgets/custom_button.dart';
 import 'package:material_chat_app/widgets/custom_text_field.dart';
 
@@ -18,7 +19,6 @@ class _CustomFormState extends State<CustomForm> {
     return Form(
         key: formKey,
         autovalidateMode: autovalidateMode,
-        
         child: Column(
           children: [
             const CustomTextField(
@@ -70,7 +70,13 @@ class _CustomFormState extends State<CustomForm> {
 
             CustomButton(
               text: 'Create Account',
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return const CreateAccView();
+                  },
+                ));
+              },
             ),
           ],
         ));

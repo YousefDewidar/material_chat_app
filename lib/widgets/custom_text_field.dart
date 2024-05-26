@@ -29,10 +29,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
           return null;
         }
       },
-      obscureText: widget.label == "Email" ? false : !isVisable,
+      obscureText: widget.label != "Password" ? false : !isVisable,
       decoration: InputDecoration(
           prefixIcon: Icon(widget.icon),
-          suffixIcon: widget.label == "Email"
+          suffixIcon: widget.label != "Password"
               ? null
               : IconButton(
                   onPressed: () {
