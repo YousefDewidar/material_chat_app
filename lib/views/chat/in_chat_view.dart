@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:material_chat_app/views/chat/widgets/message_card.dart';
+import 'package:material_chat_app/views/chat/widgets/send_message.dart';
 
 class InChatView extends StatefulWidget {
   const InChatView({super.key});
@@ -13,65 +16,45 @@ class _InChatViewState extends State<InChatView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text("yousef"),
-            Text(
-              "last seen 11:45 am",
-              style: Theme.of(context).textTheme.labelMedium,
-            ),
-          ],
+        title: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text("yousef"),
+              Text(
+                "last seen 11:45 am",
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
+            ],
+          ),
         ),
         actions: [
           IconButton(onPressed: () {}, icon: const Icon(Icons.delete)),
           IconButton(onPressed: () {}, icon: const Icon(Icons.copy)),
         ],
       ),
-      body: Column(
-        children: [
-          const Spacer(),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                // text input & camera & emoji
-                Expanded(
-                  child: Card(
-                    child: TextField(
-                      
-                      maxLines: 5,
-                      minLines: 1,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
-                      
-                        suffixIcon: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.emoji_emotions_outlined),
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.camera_alt),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-            
-                // button send
-                IconButton.filled(onPressed: (){}, icon:const Icon(Icons.send))
-                
-              ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+        child: Column(
+          children: [
+            // messages
+            Expanded(
+              child: ListView.builder(
+                reverse: true,
+                itemCount: 6,
+                itemBuilder: (context, index) {
+                  return MessageCard(
+                    index: index,
+                  );
+                },
+              ),
             ),
-          )
-        ],
+
+            // message text input
+            const SendMessageWidget(),
+          ],
+        ),
       ),
     );
   }
