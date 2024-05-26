@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:material_chat_app/views/chat/in_chat_view.dart';
 
 class ChatCard extends StatelessWidget {
   const ChatCard({
@@ -9,7 +9,13 @@ class ChatCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){},
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(
+          builder: (context) {
+            return const InChatView();
+          },
+        ));
+      },
       child: const Card(
         child: ListTile(
           leading: CircleAvatar(),
