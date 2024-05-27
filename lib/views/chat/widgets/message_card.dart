@@ -25,9 +25,28 @@ class MessageCard extends StatelessWidget {
             padding: const EdgeInsets.all(12),
             constraints:
                 BoxConstraints(maxWidth: MediaQuery.of(context).size.width / 2),
-            child: const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [Text("messagesggggg"), Text('12:00 am')],
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                const Text("messagesgggggsdvvvvvvvvvvvvvv"),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text('12:00 am'),
+                    const SizedBox(
+                      width: 4,
+                    ),
+                    index % 2 == 0
+                        ? const Icon(
+                            Icons.done_all,
+                            size: 15,
+                          )
+                        : const SizedBox(
+                            width: 0,
+                          )
+                  ],
+                )
+              ],
             ),
           ),
         ),

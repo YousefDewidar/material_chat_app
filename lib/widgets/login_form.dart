@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_chat_app/constant.dart';
 import 'package:material_chat_app/views/create_acc_view.dart';
 import 'package:material_chat_app/widgets/custom_button.dart';
 import 'package:material_chat_app/widgets/custom_text_field.dart';
@@ -62,6 +63,7 @@ class _CustomFormState extends State<CustomForm> {
                 }
               },
               text: 'login',
+              color: kPrimaryColor,
             ),
 
             const SizedBox(
@@ -77,6 +79,7 @@ class _CustomFormState extends State<CustomForm> {
                   },
                 ));
               },
+              color: Theme.of(context).colorScheme.background,
             ),
           ],
         ));

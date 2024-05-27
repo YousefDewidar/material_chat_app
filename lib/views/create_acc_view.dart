@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_chat_app/constant.dart';
 import 'package:material_chat_app/views/all_views.dart';
 import 'package:material_chat_app/widgets/custom_button.dart';
 import 'package:material_chat_app/widgets/custom_text_field.dart';
@@ -69,7 +70,7 @@ class CreateAccView extends StatelessWidget {
                           builder: (context) => const AllViews(),
                         ),
                         (route) => false);
-                  })
+                  }, color: kPrimaryColor,)
             ],
           ),
         ),
