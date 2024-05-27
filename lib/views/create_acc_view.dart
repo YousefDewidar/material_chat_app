@@ -61,12 +61,14 @@ class CreateAccView extends StatelessWidget {
               ),
 
               CustomButton(
-                  text: 'continuo',
+                  text: 'Continue',
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return const AllViews();
-                    }));
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AllViews(),
+                        ),
+                        (route) => false);
                   })
             ],
           ),
