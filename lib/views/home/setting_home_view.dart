@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:material_chat_app/widgets/info_prof.dart';
+import 'package:material_chat_app/views/setting/widgets/info_prof.dart';
 import 'package:material_chat_app/widgets/setting_card.dart';
 
 class SettingHomeView extends StatelessWidget {
