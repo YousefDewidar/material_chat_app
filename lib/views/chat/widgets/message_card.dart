@@ -28,7 +28,7 @@ class MessageCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                const Text("messagesgggggsdvvvvvvvvvvvvvv"),
+                const Text("messagesgggggsdvvvvv"),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
