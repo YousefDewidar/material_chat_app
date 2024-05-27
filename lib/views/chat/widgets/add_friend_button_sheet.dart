@@ -34,7 +34,7 @@ class AddFriendBottomSheet extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          CustomButton(text: 'Create chat', onPressed: () {},color: Theme.of(context).colorScheme.error,)
+          CustomButton(text: 'Create chat', onPressed: () {},color: Theme.of(context).colorScheme.inversePrimary,)
         ],
       ),
     );

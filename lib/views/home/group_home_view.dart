@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_chat_app/views/group/create_group_view.dart';
 import 'package:material_chat_app/views/group/widgets/group_card.dart';
 
 class GroupHomeView extends StatefulWidget {
@@ -13,7 +14,13 @@ class _GroupHomeViewState extends State<GroupHomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const CreateGroupView(),
+              ));
+        },
         child: const Icon(Icons.group),
       ),
       appBar: AppBar(

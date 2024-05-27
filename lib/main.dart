@@ -14,11 +14,11 @@ class ChatApp extends StatelessWidget {
       title: 'Chat App',
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
-      darkTheme: ThemeData.dark(),
-      
-      
+      darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          colorSchemeSeed: Colors.deepPurpleAccent),
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
       ),
       home: const LoginView(),
     );

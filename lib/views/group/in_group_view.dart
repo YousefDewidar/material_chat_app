@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:material_chat_app/views/chat/widgets/message_card.dart';
 import 'package:material_chat_app/views/chat/widgets/send_message.dart';
 
-class InChatView extends StatefulWidget {
-  const InChatView({super.key});
+class InGroupView extends StatelessWidget {
+  const InGroupView({super.key});
 
-  @override
-  State<InChatView> createState() => _InChatViewState();
-}
-
-class _InChatViewState extends State<InChatView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,17 +14,16 @@ class _InChatViewState extends State<InChatView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text("yousef"),
+              const Text("Name Group"),
               Text(
-                "last seen 11:45 am",
+                "Ahmed, yousef, Ali...",
                 style: Theme.of(context).textTheme.labelMedium,
               ),
             ],
           ),
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.delete)),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.copy)),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.person)),
         ],
       ),
       body: Padding(
@@ -37,14 +31,14 @@ class _InChatViewState extends State<InChatView> {
         child: Column(
           children: [
             // messages
-
             Expanded(
               child: ListView.builder(
                 reverse: true,
-                itemCount: 6,
+                itemCount: 7,
                 itemBuilder: (context, index) {
                   return MessageCard(
-                    index: index, isGroup: false,
+                    index: index,
+                    isGroup: true,
                   );
                 },
               ),

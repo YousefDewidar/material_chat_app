@@ -79,7 +79,7 @@ class _CustomFormState extends State<CustomForm> {
                   },
                 ));
               },
-              color: Theme.of(context).colorScheme.background,
+              color: Theme.of(context).colorScheme.onSecondary,
             ),
           ],
         ));
