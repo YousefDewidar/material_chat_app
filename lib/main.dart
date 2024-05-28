@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:material_chat_app/firebase_options.dart';
+import 'package:material_chat_app/views/all_views.dart';
 import 'package:material_chat_app/views/login_view.dart';
 
 void main() async {
@@ -27,7 +29,16 @@ class ChatApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
       ),
-      home: const LoginView(),
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.userChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return const AllViews();
+          } else {
+            return const LoginView();
+          }
+        },
+      ),
     );
   }
 }
