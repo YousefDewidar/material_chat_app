@@ -4,11 +4,13 @@ import 'package:material_chat_app/constant.dart';
 class CustomTextField extends StatefulWidget {
   final String label;
   final IconData icon;
+  final TextEditingController controller;
 
   const CustomTextField({
     super.key,
     required this.label,
     required this.icon,
+    required this.controller,
   });
 
   @override
@@ -20,6 +22,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: widget.controller,
       validator: (value) {
         if (value!.isEmpty && widget.label == 'Email') {
           return 'Please enter your email';

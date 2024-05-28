@@ -20,6 +20,7 @@ class LoginView extends StatelessWidget {
               SvgPicture.asset(
                 'assets/images/n_logo.svg',
                 height: 200,
+                // ignore: deprecated_member_use
                 color: kPrimaryColor,
               ),
 

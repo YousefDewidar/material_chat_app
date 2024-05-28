@@ -4,15 +4,15 @@ import 'package:material_chat_app/views/all_views.dart';
 import 'package:material_chat_app/widgets/custom_button.dart';
 import 'package:material_chat_app/widgets/custom_text_field.dart';
 
-class CreateAccView extends StatefulWidget {
-  const CreateAccView({super.key});
+class ForgetPassView extends StatefulWidget {
+  const ForgetPassView({super.key});
 
   @override
-  State<CreateAccView> createState() => _CreateAccViewState();
+  State<ForgetPassView> createState() => _ForgetPassViewState();
 }
 
-class _CreateAccViewState extends State<CreateAccView> {
-final TextEditingController nameCon = TextEditingController();
+class _ForgetPassViewState extends State<ForgetPassView> {
+  final TextEditingController emailCon = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,17 +33,12 @@ final TextEditingController nameCon = TextEditingController();
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
-                height: 12,
+                height: 18,
               ),
-              // Welcome
+              // Reset text
               const Text(
-                'Welcome,',
-                style: TextStyle(fontSize: 40),
-              ),
-
-              Text(
-                'Material Chat App',
-                style: Theme.of(context).textTheme.bodyLarge,
+                'Reset password,',
+                style: TextStyle(fontSize: 36),
               ),
 
               const SizedBox(
@@ -51,7 +46,7 @@ final TextEditingController nameCon = TextEditingController();
               ),
 
               const Text(
-                'Please enter your name',
+                'Please enter your email',
                 style: TextStyle(fontSize: 16),
               ),
               const SizedBox(
@@ -59,9 +54,9 @@ final TextEditingController nameCon = TextEditingController();
               ),
 
               CustomTextField(
-                label: 'Name',
-                icon: Icons.person,
-                controller:nameCon ,
+                label: 'Email',
+                icon: Icons.email,
+                controller: emailCon,
               ),
 
               const SizedBox(
@@ -69,15 +64,17 @@ final TextEditingController nameCon = TextEditingController();
               ),
 
               CustomButton(
-                  text: 'Continue',
-                  onPressed: () {
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const AllViews(),
-                        ),
-                        (route) => false);
-                  }, color: kPrimaryColor,)
+                text: 'Send email',
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AllViews(),
+                      ),
+                      (route) => false);
+                },
+                color: kPrimaryColor,
+              )
             ],
           ),
         ),

@@ -10,6 +10,7 @@ class CreateGroupView extends StatefulWidget {
 }
 
 class _CreateGroupViewState extends State<CreateGroupView> {
+  final TextEditingController nameCon = TextEditingController();
   void Function(bool?)? onChanged;
   @override
   Widget build(BuildContext context) {
@@ -44,9 +45,9 @@ class _CreateGroupViewState extends State<CreateGroupView> {
                 const SizedBox(
                   width: 20,
                 ),
-                const Expanded(
+                Expanded(
                     child:
-                        CustomTextField(label: 'Group Name', icon: Icons.group))
+                        CustomTextField(label: 'Group Name', icon: Icons.group,controller: nameCon,))
               ],
             ),
             const Divider(
