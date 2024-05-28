@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:material_chat_app/constant.dart';
 import 'package:material_chat_app/views/all_views.dart';
@@ -65,13 +66,18 @@ class _ForgetPassViewState extends State<ForgetPassView> {
 
               CustomButton(
                 text: 'Send email',
-                onPressed: () {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const AllViews(),
-                      ),
-                      (route) => false);
+                onPressed: () async {
+                  await FirebaseAuth.instance
+                      .sendPasswordResetEmail(email: emailCon.text)
+                      .then((value) {
+                    Navigator.pop(context);
+                    return ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content: Text('Email sent check your email')));
+                  }).onError((error, stackTrace) {
+                    return ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(error.toString())));
+                  });
                 },
                 color: kPrimaryColor,
               )
