@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:material_chat_app/views/setting/widgets/info_prof.dart';
@@ -47,7 +48,7 @@ class SettingHomeView extends StatelessWidget {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            child:const Text('Done'))
+                            child: const Text('Done'))
                       ],
                     );
                   },
@@ -62,7 +63,9 @@ class SettingHomeView extends StatelessWidget {
             SettingCard(
               cardName: 'Signout',
               iconSuf: Icons.logout_outlined,
-              onTap: () {},
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+              },
             ),
           ],
         ),
