@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:material_chat_app/constant.dart';
-import 'package:material_chat_app/views/all_views.dart';
-import 'package:material_chat_app/widgets/custom_button.dart';
-import 'package:material_chat_app/widgets/custom_text_field.dart';
+import 'package:material_chat_app/widgets/create_acc_form.dart';
 
-class CreateAccView extends StatefulWidget {
+
+class CreateAccView extends StatelessWidget {
   const CreateAccView({super.key});
 
-  @override
-  State<CreateAccView> createState() => _CreateAccViewState();
-}
-
-class _CreateAccViewState extends State<CreateAccView> {
-final TextEditingController nameCon = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,35 +42,9 @@ final TextEditingController nameCon = TextEditingController();
                 height: 18,
               ),
 
-              const Text(
-                'Please enter your name',
-                style: TextStyle(fontSize: 16),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
+              const CreateAccForm()
 
-              CustomTextField(
-                label: 'Name',
-                icon: Icons.person,
-                controller:nameCon ,
-              ),
-
-              const SizedBox(
-                height: 20,
-              ),
-
-              CustomButton(
-                  text: 'Continue',
-                  onPressed: () {
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const AllViews(),
-                        ),
-                        (route) => false);
-                  }, color: kPrimaryColor,)
-            ],
+    ],
           ),
         ),
       ),

@@ -1,23 +1,22 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:material_chat_app/constant.dart';
-import 'package:material_chat_app/views/create_acc_view.dart';
-import 'package:material_chat_app/views/forget_pass_view.dart';
 import 'package:material_chat_app/widgets/custom_button.dart';
 import 'package:material_chat_app/widgets/custom_text_field.dart';
 
-class LoginForm extends StatefulWidget {
-  const LoginForm({super.key});
+class CreateAccForm extends StatefulWidget {
+  const CreateAccForm({super.key});
 
   @override
-  State<LoginForm> createState() => _LoginFormState();
+  State<CreateAccForm> createState() => _CreateAccFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class _CreateAccFormState extends State<CreateAccForm> {
   final GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   final TextEditingController emailCon = TextEditingController();
   final TextEditingController passwordCon = TextEditingController();
+  final TextEditingController nameCon = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +25,13 @@ class _LoginFormState extends State<LoginForm> {
         autovalidateMode: autovalidateMode,
         child: Column(
           children: [
+            // name
+            CustomTextField(
+              label: 'Name',
+              icon: Icons.person,
+              controller: nameCon,
+            ),
+
             const SizedBox(
               height: 15,
             ),
@@ -47,38 +53,19 @@ class _LoginFormState extends State<LoginForm> {
               controller: passwordCon,
             ),
 
-            // forget pass
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                  onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ForgetPassView(),
-                      )),
-                  child: Text(
-                    'Forget password?',
-                    textAlign: TextAlign.end,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                ),
-              ],
-            ),
-
             const SizedBox(
-              height: 10,
+              height: 40,
             ),
 
-            // login
             CustomButton(
               onPressed: () async {
                 if (formKey.currentState!.validate()) {
                   await FirebaseAuth.instance
-                      .signInWithEmailAndPassword(
+                      .createUserWithEmailAndPassword(
                           email: emailCon.text, password: passwordCon.text)
-                      .then((value) => print('Login done'))
-                      .onError((error, stackTrace) =>
+                      .then((value) {
+                    return Navigator.pop(context);
+                  }).onError((error, stackTrace) =>
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text(error.toString()))));
                 } else {
@@ -86,25 +73,12 @@ class _LoginFormState extends State<LoginForm> {
                   setState(() {});
                 }
               },
-              text: 'login',
+              text: 'Create Account',
               color: kPrimaryColor,
             ),
 
             const SizedBox(
               height: 15,
-            ),
-
-            // create acc
-            CustomButton(
-              text: 'Create Account',
-              onPressed: () async {
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context) {
-                    return const CreateAccView();
-                  },
-                ));
-              },
-              color: Theme.of(context).colorScheme.onSecondary,
             ),
           ],
         ));

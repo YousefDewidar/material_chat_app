@@ -28,6 +28,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
           return 'Please enter your email';
         } else if (value.isEmpty && widget.label == 'Password') {
           return 'Please enter your password';
+        } else if (value.isEmpty && widget.label == 'Name') {
+          return 'Please enter your Name';
         } else {
           return null;
         }

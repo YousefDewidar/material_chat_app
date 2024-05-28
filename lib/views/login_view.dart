@@ -42,7 +42,7 @@ class LoginView extends StatelessWidget {
                 height: 15,
               ),
 
-              const CustomForm(),
+              const LoginForm(),
             ],
           ),
         ),
