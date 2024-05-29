@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_chat_app/widgets/create_acc_form.dart';
 
-
 class CreateAccView extends StatelessWidget {
   const CreateAccView({super.key});
 
@@ -43,8 +42,7 @@ class CreateAccView extends StatelessWidget {
               ),
 
               const CreateAccForm()
-
-    ],
+            ],
           ),
         ),
       ),

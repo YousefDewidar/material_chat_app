@@ -77,8 +77,9 @@ class _LoginFormState extends State<LoginForm> {
                   await FirebaseAuth.instance
                       .signInWithEmailAndPassword(
                           email: emailCon.text, password: passwordCon.text)
-                      .then((value) => print('Login done'))
-                      .onError((error, stackTrace) =>
+                      .then((value) {
+                    return print('Login done');
+                  }).onError((error, stackTrace) =>
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text(error.toString()))));
                 } else {
@@ -97,7 +98,7 @@ class _LoginFormState extends State<LoginForm> {
             // create acc
             CustomButton(
               text: 'Create Account',
-              onPressed: () async {
+              onPressed: () {
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
                     return const CreateAccView();
