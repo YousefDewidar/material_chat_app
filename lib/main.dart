@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:material_chat_app/firebase_options.dart';
+import 'package:material_chat_app/views/add_name_view.dart';
 import 'package:material_chat_app/views/all_views.dart';
 import 'package:material_chat_app/views/login_view.dart';
 
@@ -33,7 +34,12 @@ class ChatApp extends StatelessWidget {
         stream: FirebaseAuth.instance.userChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return const AllViews();
+            if (FirebaseAuth.instance.currentUser!.displayName == '' ||
+                FirebaseAuth.instance.currentUser!.displayName == null) {
+              return const AddNameView();
+            } else {
+              return const AllViews();
+            }
           } else {
             return const LoginView();
           }

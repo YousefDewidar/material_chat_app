@@ -11,7 +11,7 @@ class Auth {
   static Future createUser() async {
     ChatUserModel chatUserModel = ChatUserModel(
         id: user.uid,
-        name: user.displayName ?? '',
+        name: user.displayName,
         email: user.email,
         createdAt: DateTime.now().toString(),
         lastActivated: DateTime.now().toString(),

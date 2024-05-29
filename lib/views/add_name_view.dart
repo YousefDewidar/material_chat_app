@@ -1,8 +1,7 @@
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:material_chat_app/constant.dart';
-
-
+import 'package:material_chat_app/firebase/auth.dart';
 import 'package:material_chat_app/widgets/custom_button.dart';
 import 'package:material_chat_app/widgets/custom_text_field.dart';
 
@@ -19,7 +18,16 @@ class _AddNameViewState extends State<AddNameView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+              },
+              icon: const Icon(Icons.logout_outlined))
+        ],
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -59,8 +67,14 @@ class _AddNameViewState extends State<AddNameView> {
 
               CustomButton(
                 text: 'Create account',
-                onPressed: ()  {
-                
+                onPressed: () async {
+                  if (nameCon.text.isNotEmpty) {
+                    await FirebaseAuth.instance.currentUser!
+                        .updateDisplayName(nameCon.text)
+                        .then((value) {
+                      return Auth.createUser();
+                    });
+                  }
                 },
                 color: kPrimaryColor,
               )
