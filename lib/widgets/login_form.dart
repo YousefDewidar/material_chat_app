@@ -74,14 +74,11 @@ class _LoginFormState extends State<LoginForm> {
             CustomButton(
               onPressed: () async {
                 if (formKey.currentState!.validate()) {
-                  await FirebaseAuth.instance
-                      .signInWithEmailAndPassword(
-                          email: emailCon.text, password: passwordCon.text)
-                      .then((value) {
-                    return print('Login done');
-                  }).onError((error, stackTrace) =>
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(error.toString()))));
+                  try {
+                    await signInMethod();
+                  } on FirebaseAuthException catch (e) {
+                    handleShowErrors(e, context);
+                  }
                 } else {
                   autovalidateMode = AutovalidateMode.always;
                   setState(() {});
@@ -110,4 +107,28 @@ class _LoginFormState extends State<LoginForm> {
           ],
         ));
   }
+
+  Future<UserCredential> signInMethod() {
+    return FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailCon.text, password: passwordCon.text);
+  }
+}
+
+void handleShowErrors(FirebaseAuthException e, BuildContext context) {
+  if (e.code == 'wrong-password') {
+    showSnackBar(context, 'wrong password');
+  } else if (e.code == 'invalid-email') {
+    showSnackBar(context, 'invalid email');
+  } else {
+    showSnackBar(context, 'Your email or password is wrong.');
+  }
+}
+
+ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackBar(
+    BuildContext context, String message) {
+  return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    content: Text(
+      message,
+    ),
+  ));
 }

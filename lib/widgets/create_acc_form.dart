@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:material_chat_app/constant.dart';
@@ -44,18 +46,15 @@ class _CreateAccFormState extends State<CreateAccForm> {
             const SizedBox(
               height: 40,
             ),
-
             CustomButton(
               onPressed: () async {
                 if (formKey.currentState!.validate()) {
-                  await FirebaseAuth.instance
-                      .createUserWithEmailAndPassword(
-                          email: emailCon.text, password: passwordCon.text)
-                      .then((value) {
-                    return print('create without name');
-                  }).onError((error, stackTrace) =>
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(error.toString()))));
+                  try {
+                    await register(emailCon, passwordCon);
+                    showSnackBar(context, 'Created done');
+                  } on FirebaseAuthException catch (e) {
+                    handleShowErrors(e, context);
+                  }
                 } else {
                   autovalidateMode = AutovalidateMode.always;
                   setState(() {});
@@ -67,4 +66,28 @@ class _CreateAccFormState extends State<CreateAccForm> {
           ],
         ));
   }
+
+  void handleShowErrors(FirebaseAuthException e, BuildContext context) {
+    if (e.code == 'email-already-in-use') {
+      showSnackBar(context, 'email-already-in-use');
+    } else if (e.code == 'invalid-email') {
+      showSnackBar(context, 'invalid email');
+    } else if (e.code == 'weak-password') {
+      showSnackBar(context, 'weak password');
+    }
+  }
+
+  ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackBar(
+      BuildContext context, String message) {
+    return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(
+        message,
+      ),
+    ));
+  }
+}
+
+Future<void> register(emailCon, passwordCon) async {
+  await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: emailCon.text, password: passwordCon.text);
 }
