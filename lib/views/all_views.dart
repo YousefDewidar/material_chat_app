@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:material_chat_app/provider/provider.dart';
 import 'package:material_chat_app/views/home/chat_home_view.dart';
 import 'package:material_chat_app/views/home/contact_home_view.dart';
 import 'package:material_chat_app/views/home/group_home_view.dart';
 import 'package:material_chat_app/views/home/setting_home_view.dart';
+import 'package:provider/provider.dart';
 
 class AllViews extends StatefulWidget {
   const AllViews({super.key});
@@ -14,6 +16,12 @@ class AllViews extends StatefulWidget {
 class _AllViewsState extends State<AllViews> {
   PageController pageController = PageController();
   int curIndex = 0;
+
+  @override
+  void initState() {
+    Provider.of<MyProvider>(context,listen: false).getLastData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
