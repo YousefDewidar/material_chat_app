@@ -1,14 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:material_chat_app/provider/provider.dart';
 import 'package:material_chat_app/views/setting/widgets/info_prof.dart';
 import 'package:material_chat_app/widgets/setting_card.dart';
+import 'package:provider/provider.dart';
 
 class SettingHomeView extends StatelessWidget {
   const SettingHomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final prov = Provider.of<MyProvider>(context);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -40,7 +43,9 @@ class SettingHomeView extends StatelessWidget {
                       content: SingleChildScrollView(
                         child: BlockPicker(
                           pickerColor: Colors.red,
-                          onColorChanged: (v) {},
+                          onColorChanged: (v) {
+                            prov.changeTheme(v);
+                          },
                         ),
                       ),
                       actions: [
@@ -59,8 +64,7 @@ class SettingHomeView extends StatelessWidget {
               cardName: 'Dark mode',
               iconPre: Icons.dark_mode,
               hasSwitch: true,
-              onTap: () {
-              },
+              onTap: () {},
             ),
             SettingCard(
               cardName: 'Signout',

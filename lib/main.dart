@@ -30,10 +30,10 @@ class ChatApp extends StatelessWidget {
           themeMode: value.mode,
           darkTheme: ThemeData(
             colorScheme: ColorScheme.fromSeed(
-                seedColor: Colors.deepPurple, brightness: Brightness.dark),
+                seedColor:value.themeCol, brightness: Brightness.dark),
           ),
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+            colorScheme: ColorScheme.fromSeed(seedColor: value.themeCol),
           ),
           home: StreamBuilder(
             stream: FirebaseAuth.instance.userChanges(),
