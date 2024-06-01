@@ -99,7 +99,7 @@ class _LoginFormState extends State<LoginForm> {
             CustomButton(
               text: 'Create Account',
               onPressed: () {
-                Navigator.pushReplacement(context, MaterialPageRoute(
+                Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
                     return const CreateAccView();
                   },

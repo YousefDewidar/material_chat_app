@@ -58,7 +58,9 @@ class SettingHomeView extends StatelessWidget {
             SettingCard(
               cardName: 'Dark mode',
               iconPre: Icons.dark_mode,
-              onTap: () {},
+              hasSwitch: true,
+              onTap: () {
+              },
             ),
             SettingCard(
               cardName: 'Signout',
