@@ -35,29 +35,7 @@ class SettingHomeView extends StatelessWidget {
               cardName: 'Theme',
               iconPre: Icons.color_lens,
               onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: const Text('Change Theme'),
-                      content: SingleChildScrollView(
-                        child: BlockPicker(
-                          pickerColor: Colors.red,
-                          onColorChanged: (v) {
-                            prov.changeTheme(v);
-                          },
-                        ),
-                      ),
-                      actions: [
-                        ElevatedButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Text('Done'))
-                      ],
-                    );
-                  },
-                );
+                pickerCol(context, prov);
               },
             ),
             SettingCard(
@@ -77,5 +55,31 @@ class SettingHomeView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<dynamic> pickerCol(BuildContext context, MyProvider prov) {
+    return showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text('Change Theme'),
+                    content: SingleChildScrollView(
+                      child: BlockPicker(
+                        pickerColor: prov.themeCol,
+                        onColorChanged: (v) {
+                          prov.changeTheme(v);
+                        },
+                      ),
+                    ),
+                    actions: [
+                      ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text('Done'))
+                    ],
+                  );
+                },
+              );
   }
 }
