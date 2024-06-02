@@ -3,8 +3,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:material_chat_app/constant.dart';
 import 'package:material_chat_app/widgets/login_form.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends StatefulWidget {
   const LoginView({super.key});
+
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +29,7 @@ class LoginView extends StatelessWidget {
                 // ignore: deprecated_member_use
                 color: kPrimaryColor,
               ),
-
+    
               const SizedBox(
                 height: 12,
               ),
@@ -32,16 +38,16 @@ class LoginView extends StatelessWidget {
                 'Welcome Back,',
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
-
+    
               Text(
                 'Material Chat App with Yousef Dewidar',
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
-
+    
               const SizedBox(
                 height: 15,
               ),
-
+    
               const LoginForm(),
             ],
           ),

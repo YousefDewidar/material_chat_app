@@ -5,6 +5,7 @@ import 'package:material_chat_app/views/create_acc_view.dart';
 import 'package:material_chat_app/views/forget_pass_view.dart';
 import 'package:material_chat_app/widgets/custom_button.dart';
 import 'package:material_chat_app/widgets/custom_text_field.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -18,6 +19,7 @@ class _LoginFormState extends State<LoginForm> {
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   final TextEditingController emailCon = TextEditingController();
   final TextEditingController passwordCon = TextEditingController();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -71,22 +73,36 @@ class _LoginFormState extends State<LoginForm> {
             ),
 
             // login
-            CustomButton(
-              onPressed: () async {
-                if (formKey.currentState!.validate()) {
-                  try {
-                    await signInMethod();
-                  } on FirebaseAuthException catch (e) {
-                    handleShowErrors(e, context);
-                  }
-                } else {
-                  autovalidateMode = AutovalidateMode.always;
-                  setState(() {});
-                }
-              },
-              text: 'login',
-              color: kPrimaryColor,
-            ),
+            isLoading
+                ? SizedBox(
+                    height: 50,
+                    child: ModalProgressHUD(
+                        color: kPrimaryColor,
+                        inAsyncCall: isLoading,
+                        child: const SizedBox(
+                          height: 0,
+                        )),
+                  )
+                : CustomButton(
+                    onPressed: () async {
+                      if (formKey.currentState!.validate()) {
+                        try {
+                          isLoading = true;
+                          setState(() {});
+                          await signInMethod();
+                        } on FirebaseAuthException catch (e) {
+                          handleShowErrors(e, context);
+                        }
+                        isLoading = false;
+                        setState(() {});
+                      } else {
+                        autovalidateMode = AutovalidateMode.always;
+                        setState(() {});
+                      }
+                    },
+                    text: 'login',
+                    color: kPrimaryColor,
+                  ),
 
             const SizedBox(
               height: 15,
