@@ -12,7 +12,7 @@ class InChatView extends StatelessWidget {
 
   void scrollDown() {
     controller.animateTo(
-      controller.position.maxScrollExtent,
+      0,
       duration: const Duration(seconds: 1),
       curve: Curves.fastEaseInToSlowEaseOut,
     );
@@ -59,7 +59,7 @@ class InChatView extends StatelessWidget {
             StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection(kMessagesCollection)
-                    .orderBy(kCreatedAt)
+                    .orderBy(kCreatedAt,descending: true)
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
@@ -71,6 +71,7 @@ class InChatView extends StatelessWidget {
                     }
                     return Expanded(
                       child: ListView.builder(
+                        reverse: true,
                         controller: controller,
                         itemCount: messagesList.length,
                         itemBuilder: (context, index) {
