@@ -4,6 +4,7 @@ import 'package:material_chat_app/constant.dart';
 import 'package:material_chat_app/models/message.dart';
 import 'package:material_chat_app/views/chat/widgets/delete_messages_dialog.dart';
 import 'package:material_chat_app/views/chat/widgets/message_card.dart';
+import 'package:material_chat_app/views/chat/widgets/messages_view.dart';
 import 'package:material_chat_app/views/chat/widgets/send_message.dart';
 
 class InChatView extends StatelessWidget {
@@ -56,40 +57,7 @@ class InChatView extends StatelessWidget {
         child: Column(
           children: [
             // messages
-            StreamBuilder(
-                stream: FirebaseFirestore.instance
-                    .collection(kMessagesCollection)
-                    .orderBy(kCreatedAt,descending: true)
-                    .snapshots(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    List<String> messagesList = [];
-                    List<DateTime> timeList = [];
-                    for (int i = 0; i < snapshot.data!.docs.length; i++) {
-                      messagesList.add(snapshot.data!.docs[i][kMessage]);
-                      timeList.add(snapshot.data!.docs[i][kCreatedAt].toDate());
-                    }
-                    return Expanded(
-                      child: ListView.builder(
-                        reverse: true,
-                        controller: controller,
-                        itemCount: messagesList.length,
-                        itemBuilder: (context, index) {
-                          return MessageCard(
-                            message: Message(
-                                message: messagesList[index],
-                                createAt:
-                                    '${timeList[index].hour}:${timeList[index].minute} am'),
-                            index: index,
-                            isGroup: false,
-                          );
-                        },
-                      ),
-                    );
-                  } else {
-                    return const Expanded(child: SizedBox());
-                  }
-                }),
+            MessagesView(controller: controller),
 
             // message text input
             SendMessageWidget(
@@ -101,3 +69,4 @@ class InChatView extends StatelessWidget {
     );
   }
 }
+
