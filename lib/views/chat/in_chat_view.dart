@@ -37,13 +37,13 @@ class _InChatViewState extends State<InChatView> {
         child: Column(
           children: [
             // messages
-
             Expanded(
               child: ListView.builder(
                 reverse: true,
                 itemCount: 6,
                 itemBuilder: (context, index) {
                   return MessageCard(
+                    message: 'hyiii',
                     index: index, isGroup: false,
                   );
                 },

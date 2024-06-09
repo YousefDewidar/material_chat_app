@@ -1,11 +1,20 @@
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:material_chat_app/constant.dart';
 
-class SendMessageWidget extends StatelessWidget {
+class SendMessageWidget extends StatefulWidget {
   const SendMessageWidget({
     super.key,
   });
 
+  @override
+  State<SendMessageWidget> createState() => _SendMessageWidgetState();
+}
+
+class _SendMessageWidgetState extends State<SendMessageWidget> {
+  CollectionReference messages =
+      FirebaseFirestore.instance.collection(kMessagesCollection);
+  TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -16,12 +25,11 @@ class SendMessageWidget extends StatelessWidget {
           Expanded(
             child: Card(
               child: TextField(
-                maxLines: 5,
-                minLines: 1,
+                controller: controller,
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 15, vertical: 10),
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   suffixIcon: Row(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -40,10 +48,18 @@ class SendMessageWidget extends StatelessWidget {
               ),
             ),
           ),
-    
+
           // button send
           IconButton.filled(
-              onPressed: () {}, icon: const Icon(Icons.send))
+              onPressed: () {
+                if (controller.text.isNotEmpty) {
+                  messages.add({
+                    'message': controller.text,
+                  });
+                  controller.clear();
+                }
+              },
+              icon: const Icon(Icons.send))
         ],
       ),
     );

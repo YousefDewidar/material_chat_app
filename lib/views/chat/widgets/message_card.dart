@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
 class MessageCard extends StatelessWidget {
-  const MessageCard({super.key, required this.index, required this.isGroup});
+  const MessageCard(
+      {super.key,
+      required this.index,
+      required this.isGroup,
+      required this.message});
   final int index;
   final bool isGroup;
+  final String message;
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +34,12 @@ class MessageCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                isGroup
+                index % 2 == 0
                     ? const SizedBox(
                         height: 0,
                       )
                     : const Text("Name"),
-                const Text("messagesgggggsdvvvvv"),
+                Text(message),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [

@@ -5,6 +5,7 @@ import 'package:material_chat_app/firebase_options.dart';
 import 'package:material_chat_app/provider/provider.dart';
 import 'package:material_chat_app/views/add_name_view.dart';
 import 'package:material_chat_app/views/all_views.dart';
+import 'package:material_chat_app/views/chat/in_chat_view.dart';
 import 'package:material_chat_app/views/login_view.dart';
 import 'package:provider/provider.dart';
 
@@ -35,21 +36,22 @@ class ChatApp extends StatelessWidget {
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: value.themeCol),
           ),
-          home: StreamBuilder(
-            stream: FirebaseAuth.instance.userChanges(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                if (FirebaseAuth.instance.currentUser!.displayName == '' ||
-                    FirebaseAuth.instance.currentUser!.displayName == null) {
-                  return const AddNameView();
-                } else {
-                  return const AllViews();
-                }
-              } else {
-                return const LoginView();
-              }
-            },
-          ),
+          home:InChatView() ,
+          // StreamBuilder(
+          //   stream: FirebaseAuth.instance.userChanges(),
+          //   builder: (context, snapshot) {
+          //     if (snapshot.hasData) {
+          //       if (FirebaseAuth.instance.currentUser!.displayName == '' ||
+          //           FirebaseAuth.instance.currentUser!.displayName == null) {
+          //         return const AddNameView();
+          //       } else {
+          //         return const AllViews();
+          //       }
+          //     } else {
+          //       return const LoginView();
+          //     }
+          //   },
+          // ),
         ),
       ),
     );

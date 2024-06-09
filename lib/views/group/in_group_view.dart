@@ -37,6 +37,7 @@ class InGroupView extends StatelessWidget {
                 itemCount: 7,
                 itemBuilder: (context, index) {
                   return MessageCard(
+                    message: 'i love u',
                     index: index,
                     isGroup: true,
                   );
