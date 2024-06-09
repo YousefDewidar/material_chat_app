@@ -1,15 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:material_chat_app/constant.dart';
-import 'package:material_chat_app/models/message.dart';
 import 'package:material_chat_app/views/chat/widgets/delete_messages_dialog.dart';
-import 'package:material_chat_app/views/chat/widgets/message_card.dart';
 import 'package:material_chat_app/views/chat/widgets/messages_view.dart';
 import 'package:material_chat_app/views/chat/widgets/send_message.dart';
 
 class InChatView extends StatelessWidget {
   InChatView({super.key});
   final ScrollController controller = ScrollController();
+  final FirebaseAuth firebaseAuth= FirebaseAuth.instance;
 
   void scrollDown() {
     controller.animateTo(
@@ -62,6 +61,7 @@ class InChatView extends StatelessWidget {
             // message text input
             SendMessageWidget(
               scrollDown: scrollDown,
+              email: firebaseAuth.currentUser!.email ?? 'HHHHHHH@HHHHHH',
             ),
           ],
         ),
@@ -69,4 +69,3 @@ class InChatView extends StatelessWidget {
     );
   }
 }
-

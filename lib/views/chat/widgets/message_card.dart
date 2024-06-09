@@ -11,6 +11,8 @@ class MessageCard extends StatelessWidget {
   final bool isGroup;
   final Message message;
 
+  
+
   @override
   Widget build(BuildContext context) {
     return Row(

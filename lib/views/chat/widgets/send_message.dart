@@ -4,9 +4,11 @@ import 'package:material_chat_app/constant.dart';
 
 class SendMessageWidget extends StatefulWidget {
   final Function scrollDown;
+  final String email;
   const SendMessageWidget({
     super.key,
     required this.scrollDown,
+    required this.email
   });
 
   @override
@@ -56,7 +58,7 @@ class _SendMessageWidgetState extends State<SendMessageWidget> {
               onPressed: () {
                 if (controller.text.isNotEmpty) {
                   messages.add(
-                      {kMessage: controller.text, kCreatedAt: DateTime.now()});
+                      {kMessage: controller.text, kCreatedAt: DateTime.now(),'email':widget.email});
                   widget.scrollDown();
                   controller.clear();
                   setState(() {});

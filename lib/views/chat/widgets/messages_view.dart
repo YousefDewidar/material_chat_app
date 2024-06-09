@@ -17,7 +17,7 @@ class MessagesView extends StatelessWidget {
     return StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection(kMessagesCollection)
-            .orderBy(kCreatedAt,descending: true)
+            .orderBy(kCreatedAt, descending: true)
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -35,6 +35,7 @@ class MessagesView extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return MessageCard(
                     message: Message(
+                        id: '1',
                         message: messagesList[index],
                         createAt:
                             '${timeList[index].hour}:${timeList[index].minute} am'),

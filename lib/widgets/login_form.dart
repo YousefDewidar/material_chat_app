@@ -91,6 +91,7 @@ class _LoginFormState extends State<LoginForm> {
                           setState(() {});
                           await signInMethod();
                         } on FirebaseAuthException catch (e) {
+                          // ignore: use_build_context_synchronously
                           handleShowErrors(e, context);
                         }
                         isLoading = false;
