@@ -36,7 +36,7 @@ class ChatApp extends StatelessWidget {
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: value.themeCol),
           ),
-          home:InChatView() ,
+          home: InChatView() ,
           // StreamBuilder(
           //   stream: FirebaseAuth.instance.userChanges(),
           //   builder: (context, snapshot) {

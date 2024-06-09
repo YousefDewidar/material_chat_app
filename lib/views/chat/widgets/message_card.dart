@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_chat_app/models/message.dart';
 
 class MessageCard extends StatelessWidget {
   const MessageCard(
@@ -8,7 +9,7 @@ class MessageCard extends StatelessWidget {
       required this.message});
   final int index;
   final bool isGroup;
-  final String message;
+  final Message message;
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +40,11 @@ class MessageCard extends StatelessWidget {
                         height: 0,
                       )
                     : const Text("Name"),
-                Text(message),
+                Text(message.message),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const Text('12:00 am'),
+                    Text(message.createAt),
                     const SizedBox(
                       width: 4,
                     ),

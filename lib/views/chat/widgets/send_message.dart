@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:material_chat_app/constant.dart';
 
 class SendMessageWidget extends StatefulWidget {
+  final Function scrollDown;
   const SendMessageWidget({
     super.key,
+    required this.scrollDown,
   });
 
   @override
@@ -53,10 +55,11 @@ class _SendMessageWidgetState extends State<SendMessageWidget> {
           IconButton.filled(
               onPressed: () {
                 if (controller.text.isNotEmpty) {
-                  messages.add({
-                    'message': controller.text,
-                  });
+                  messages.add(
+                      {kMessage: controller.text, kCreatedAt: DateTime.now()});
+                  widget.scrollDown();
                   controller.clear();
+                  setState(() {});
                 }
               },
               icon: const Icon(Icons.send))

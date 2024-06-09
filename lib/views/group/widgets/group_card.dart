@@ -13,7 +13,7 @@ class GroupCard extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const InGroupView(),
+              builder: (context) => InGroupView(),
             ));
       },
       child: const Card(

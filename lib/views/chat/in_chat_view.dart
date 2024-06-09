@@ -1,15 +1,30 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:material_chat_app/constant.dart';
+import 'package:material_chat_app/models/message.dart';
+import 'package:material_chat_app/views/chat/widgets/delete_messages_dialog.dart';
 import 'package:material_chat_app/views/chat/widgets/message_card.dart';
 import 'package:material_chat_app/views/chat/widgets/send_message.dart';
 
-class InChatView extends StatefulWidget {
-  const InChatView({super.key});
+class InChatView extends StatelessWidget {
+  InChatView({super.key});
+  final ScrollController controller = ScrollController();
 
-  @override
-  State<InChatView> createState() => _InChatViewState();
-}
+  void scrollDown() {
+    controller.animateTo(
+      controller.position.maxScrollExtent,
+      duration: const Duration(seconds: 1),
+      curve: Curves.fastEaseInToSlowEaseOut,
+    );
+  }
 
-class _InChatViewState extends State<InChatView> {
+  void deleteAllMessages(context) {
+    showDialog(
+      context: context,
+      builder: (context) => const DeleteMessagesDialog(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +43,11 @@ class _InChatViewState extends State<InChatView> {
           ),
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.delete)),
+          IconButton(
+              onPressed: () {
+                deleteAllMessages(context);
+              },
+              icon: const Icon(Icons.delete)),
           IconButton(onPressed: () {}, icon: const Icon(Icons.copy)),
         ],
       ),
@@ -37,21 +56,44 @@ class _InChatViewState extends State<InChatView> {
         child: Column(
           children: [
             // messages
-            Expanded(
-              child: ListView.builder(
-                reverse: true,
-                itemCount: 6,
-                itemBuilder: (context, index) {
-                  return MessageCard(
-                    message: 'hyiii',
-                    index: index, isGroup: false,
-                  );
-                },
-              ),
-            ),
+            StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection(kMessagesCollection)
+                    .orderBy(kCreatedAt)
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    List<String> messagesList = [];
+                    List<DateTime> timeList = [];
+                    for (int i = 0; i < snapshot.data!.docs.length; i++) {
+                      messagesList.add(snapshot.data!.docs[i][kMessage]);
+                      timeList.add(snapshot.data!.docs[i][kCreatedAt].toDate());
+                    }
+                    return Expanded(
+                      child: ListView.builder(
+                        controller: controller,
+                        itemCount: messagesList.length,
+                        itemBuilder: (context, index) {
+                          return MessageCard(
+                            message: Message(
+                                message: messagesList[index],
+                                createAt:
+                                    '${timeList[index].hour}:${timeList[index].minute} am'),
+                            index: index,
+                            isGroup: false,
+                          );
+                        },
+                      ),
+                    );
+                  } else {
+                    return const Expanded(child: SizedBox());
+                  }
+                }),
 
             // message text input
-            const SendMessageWidget(),
+            SendMessageWidget(
+              scrollDown: scrollDown,
+            ),
           ],
         ),
       ),

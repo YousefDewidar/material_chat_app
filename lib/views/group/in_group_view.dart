@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:material_chat_app/models/message.dart';
 import 'package:material_chat_app/views/chat/widgets/message_card.dart';
 import 'package:material_chat_app/views/chat/widgets/send_message.dart';
 
 class InGroupView extends StatelessWidget {
-  const InGroupView({super.key});
+  InGroupView({super.key});
+  final ScrollController controller = ScrollController();
+  void scrollDown() {
+    controller.animateTo(
+      controller.position.maxScrollExtent,
+      duration: const Duration(seconds: 1),
+      curve: Curves.fastEaseInToSlowEaseOut,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +46,10 @@ class InGroupView extends StatelessWidget {
                 itemCount: 7,
                 itemBuilder: (context, index) {
                   return MessageCard(
-                    message: 'i love u',
+                    message: Message(
+                      message: 'i love u',
+                      createAt: ' am',
+                    ),
                     index: index,
                     isGroup: true,
                   );
@@ -46,7 +58,9 @@ class InGroupView extends StatelessWidget {
             ),
 
             // message text input
-            const SendMessageWidget(),
+            SendMessageWidget(
+              scrollDown: scrollDown,
+            ),
           ],
         ),
       ),
