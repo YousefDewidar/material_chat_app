@@ -1,8 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:material_chat_app/provider/provider.dart';
 import 'package:material_chat_app/views/setting/widgets/info_prof.dart';
+import 'package:material_chat_app/views/setting/widgets/sign_out_dialog.dart';
 import 'package:material_chat_app/widgets/setting_card.dart';
 import 'package:provider/provider.dart';
 
@@ -47,8 +47,11 @@ class SettingHomeView extends StatelessWidget {
             SettingCard(
               cardName: 'Signout',
               iconSuf: Icons.logout_outlined,
-              onTap: () async {
-                await FirebaseAuth.instance.signOut();
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) =>const SignOutDialog(),
+                );
               },
             ),
           ],
@@ -59,27 +62,27 @@ class SettingHomeView extends StatelessWidget {
 
   Future<dynamic> pickerCol(BuildContext context, MyProvider prov) {
     return showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: const Text('Change Theme'),
-                    content: SingleChildScrollView(
-                      child: BlockPicker(
-                        pickerColor: prov.themeCol,
-                        onColorChanged: (v) {
-                          prov.changeTheme(v);
-                        },
-                      ),
-                    ),
-                    actions: [
-                      ElevatedButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Text('Done'))
-                    ],
-                  );
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Change Theme'),
+          content: SingleChildScrollView(
+            child: BlockPicker(
+              pickerColor: prov.themeCol,
+              onColorChanged: (v) {
+                prov.changeTheme(v);
+              },
+            ),
+          ),
+          actions: [
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
                 },
-              );
+                child: const Text('Done'))
+          ],
+        );
+      },
+    );
   }
 }
