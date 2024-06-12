@@ -35,7 +35,6 @@ class MessagesView extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return MessageCard(
                     message: Message(
-                        id: '1',
                         message: messagesList[index],
                         createAt:
                             '${timeList[index].hour}:${timeList[index].minute} am'),

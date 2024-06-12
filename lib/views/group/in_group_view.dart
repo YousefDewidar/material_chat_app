@@ -47,7 +47,6 @@ class InGroupView extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return MessageCard(
                     message: Message(
-                      id: '',
                       message: 'i love u',
                       createAt: ' am',
                     ),
