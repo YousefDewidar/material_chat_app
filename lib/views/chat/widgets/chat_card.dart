@@ -8,6 +8,19 @@ class ChatCard extends StatelessWidget {
     super.key,
   });
 
+  handleLastmessage(
+      AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+    if (snapshot.data!.docs.isEmpty) {
+      return 'Last message';
+    } else {
+      if (snapshot.data!.docs.last[kMessage].toString().contains('https://')) {
+        return 'Photo';
+      } else {
+        return snapshot.data!.docs.last[kMessage];
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -29,9 +42,7 @@ class ChatCard extends StatelessWidget {
                 child: ListTile(
                   leading: const CircleAvatar(),
                   title: const Text('Name'),
-                  subtitle: Text(snapshot.data!.docs.isEmpty
-                      ? 'Last message'
-                      : snapshot.data!.docs.last[kMessage]),
+                  subtitle: Text(handleLastmessage(snapshot)),
                   trailing: Badge(
                     label: Text('${snapshot.data!.docs.length}'),
                     padding: const EdgeInsets.symmetric(horizontal: 10),
