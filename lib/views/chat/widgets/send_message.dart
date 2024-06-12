@@ -7,7 +7,6 @@ class SendMessageWidget extends StatefulWidget {
     super.key,
     required this.scrollDown,
   });
-
   @override
   State<SendMessageWidget> createState() => _SendMessageWidgetState();
 }

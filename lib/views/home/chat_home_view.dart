@@ -23,7 +23,7 @@ class _ChatHomeViewState extends State<ChatHomeView> {
         child: const Icon(Icons.chat),
       ),
       appBar: AppBar(
-        // automaticallyImplyLeading: false,
+        automaticallyImplyLeading: false,
         title: Text(
           'Chats',
           style: Theme.of(context).textTheme.headlineMedium,

@@ -21,6 +21,7 @@ class ChatCard extends StatelessWidget {
       child: StreamBuilder(
           stream: FirebaseFirestore.instance
               .collection(kMessagesCollection)
+              .orderBy(kCreatedAt)
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
@@ -28,7 +29,9 @@ class ChatCard extends StatelessWidget {
                 child: ListTile(
                   leading: const CircleAvatar(),
                   title: const Text('Name'),
-                  subtitle: const Text('Last message'),
+                  subtitle: Text(snapshot.data!.docs.isEmpty
+                      ? 'Last message'
+                      : snapshot.data!.docs.last[kMessage]),
                   trailing: Badge(
                     label: Text('${snapshot.data!.docs.length}'),
                     padding: const EdgeInsets.symmetric(horizontal: 10),
