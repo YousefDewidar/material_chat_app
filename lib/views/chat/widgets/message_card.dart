@@ -28,7 +28,7 @@ class MessageCard extends StatelessWidget {
       children: [
         Card(
           color: isMyAcc()
-              ? Theme.of(context).colorScheme.tertiary
+              ? Theme.of(context).colorScheme.background
               : Theme.of(context).colorScheme.tertiaryContainer,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
@@ -44,11 +44,6 @@ class MessageCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                isMyAcc()
-                    ? const SizedBox(
-                        height: 0,
-                      )
-                    : const Text("Name"),
                 Text(message.message),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,

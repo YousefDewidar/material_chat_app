@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_chat_app/firebase/auth.dart';
 import 'package:material_chat_app/views/setting/qr_code_view.dart';
 
 class InfoProf extends StatelessWidget {
@@ -7,7 +8,7 @@ class InfoProf extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       child: Row(
         children: [
           const CircleAvatar(
@@ -16,9 +17,9 @@ class InfoProf extends StatelessWidget {
           const SizedBox(
             width: 20,
           ),
-          const Text(
-            'Yousef',
-            style: TextStyle(fontSize: 20),
+          Text(
+            Auth.user.displayName ?? '',
+            style: const TextStyle(fontSize: 20),
           ),
           const Spacer(),
           IconButton(

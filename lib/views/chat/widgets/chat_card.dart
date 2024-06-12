@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:material_chat_app/constant.dart';
 import 'package:material_chat_app/views/chat/in_chat_view.dart';
+import 'package:material_chat_app/views/chat/widgets/say_hi_view.dart';
 
 class ChatCard extends StatelessWidget {
   const ChatCard({
@@ -10,22 +11,22 @@ class ChatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(context, MaterialPageRoute(
-          builder: (context) {
-            return InChatView();
-          },
-        ));
-      },
-      child: StreamBuilder(
-          stream: FirebaseFirestore.instance
-              .collection(kMessagesCollection)
-              .orderBy(kCreatedAt)
-              .snapshots(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return Card(
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection(kMessagesCollection)
+            .orderBy(kCreatedAt)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return InChatView();
+                  },
+                ));
+              },
+              child: Card(
                 child: ListTile(
                   leading: const CircleAvatar(),
                   title: const Text('Name'),
@@ -38,11 +39,11 @@ class ChatCard extends StatelessWidget {
                     largeSize: 30,
                   ),
                 ),
-              );
-            } else {
-              return const SizedBox();
-            }
-          }),
-    );
+              ),
+            );
+          } else {
+            return const SizedBox();
+          }
+        });
   }
 }

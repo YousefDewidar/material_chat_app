@@ -52,6 +52,7 @@ class _CreateAccFormState extends State<CreateAccForm> {
                   try {
                     await register(emailCon, passwordCon);
                     showSnackBar(context, 'Created done');
+                    Navigator.pop(context);
                   } on FirebaseAuthException catch (e) {
                     handleShowErrors(e, context);
                   }
