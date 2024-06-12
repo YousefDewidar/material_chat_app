@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:material_chat_app/firebase/data_base.dart';
 
 class SendMessageWidget extends StatefulWidget {
@@ -12,6 +13,7 @@ class SendMessageWidget extends StatefulWidget {
 }
 
 class _SendMessageWidgetState extends State<SendMessageWidget> {
+  
   TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,13 @@ class _SendMessageWidgetState extends State<SendMessageWidget> {
                         icon: const Icon(Icons.emoji_emotions_outlined),
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          final ImagePicker picker = ImagePicker();
+                          XFile? image = await picker.pickImage(
+                              source: ImageSource.gallery);
+
+                          print(image!.path);
+                        },
                         icon: const Icon(Icons.camera_alt),
                       ),
                     ],

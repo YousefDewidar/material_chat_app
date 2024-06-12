@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:material_chat_app/constant.dart';
 import 'package:material_chat_app/views/chat/in_chat_view.dart';
-import 'package:material_chat_app/views/chat/widgets/say_hi_view.dart';
 
 class ChatCard extends StatelessWidget {
   const ChatCard({
