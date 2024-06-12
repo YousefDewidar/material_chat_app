@@ -48,8 +48,10 @@ class InGroupView extends StatelessWidget {
                   return MessageCard(
                     message: Message(
                       fromId: 'as',
+                      name: '',
                       message: 'i love u',
                       createAt: ' am',
+                      email: ''
                     ),
                     index: index,
                     isGroup: true,

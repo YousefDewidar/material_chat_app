@@ -23,11 +23,15 @@ class MessagesView extends StatelessWidget {
           if (snapshot.hasData) {
             List<String> messagesList = [];
             List<String> idList = [];
+            List<String> nameList = [];
+            List<String> emailList = [];
             List<DateTime> timeList = [];
             for (int i = 0; i < snapshot.data!.docs.length; i++) {
               messagesList.add(snapshot.data!.docs[i][kMessage]);
               timeList.add(snapshot.data!.docs[i][kCreatedAt].toDate());
               idList.add(snapshot.data!.docs[i]['from_id']);
+              nameList.add(snapshot.data!.docs[i]['name']);
+              emailList.add(snapshot.data!.docs[i]['email']);
             }
             return Expanded(
               child: ListView.builder(
@@ -37,6 +41,8 @@ class MessagesView extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return MessageCard(
                     message: Message(
+                      name: nameList[index],
+                        email: emailList[index],
                         fromId: idList[index],
                         message: messagesList[index],
                         createAt:

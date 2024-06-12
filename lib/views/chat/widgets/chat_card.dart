@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:material_chat_app/constant.dart';
+import 'package:material_chat_app/firebase/data_base.dart';
 import 'package:material_chat_app/views/chat/in_chat_view.dart';
 
 class ChatCard extends StatelessWidget {
@@ -31,7 +32,8 @@ class ChatCard extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return GestureDetector(
-              onTap: () {
+              onTap: () async{
+                await DataBase().sendName();
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
                     return InChatView();
