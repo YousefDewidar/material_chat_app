@@ -60,7 +60,6 @@ class InGroupView extends StatelessWidget {
 
             // message text input
             SendMessageWidget(
-              email: 'a',
               scrollDown: scrollDown,
             ),
           ],

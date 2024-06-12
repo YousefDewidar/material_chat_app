@@ -1,14 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:material_chat_app/constant.dart';
+import 'package:material_chat_app/firebase/data_base.dart';
 
 class SendMessageWidget extends StatefulWidget {
   final Function scrollDown;
-  final String email;
   const SendMessageWidget({
     super.key,
     required this.scrollDown,
-    required this.email
   });
 
   @override
@@ -16,8 +13,6 @@ class SendMessageWidget extends StatefulWidget {
 }
 
 class _SendMessageWidgetState extends State<SendMessageWidget> {
-  CollectionReference messages =
-      FirebaseFirestore.instance.collection(kMessagesCollection);
   TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -57,8 +52,7 @@ class _SendMessageWidgetState extends State<SendMessageWidget> {
           IconButton.filled(
               onPressed: () {
                 if (controller.text.isNotEmpty) {
-                  messages.add(
-                      {kMessage: controller.text, kCreatedAt: DateTime.now(),'email':widget.email});
+                  DataBase().sendMessage(msg: controller.text);
                   widget.scrollDown();
                   controller.clear();
                   setState(() {});

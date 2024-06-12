@@ -61,7 +61,7 @@ class InChatView extends StatelessWidget {
             // message text input
             SendMessageWidget(
               scrollDown: scrollDown,
-              email: firebaseAuth.currentUser!.email ?? 'HHHHHHH@HHHHHH',
+              
             ),
           ],
         ),
