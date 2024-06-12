@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:material_chat_app/firebase/data_base.dart';
+import 'package:material_chat_app/firebase/storage.dart';
 
 class SendMessageWidget extends StatefulWidget {
   final Function scrollDown;
@@ -13,7 +16,6 @@ class SendMessageWidget extends StatefulWidget {
 }
 
 class _SendMessageWidgetState extends State<SendMessageWidget> {
-  
   TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,11 @@ class _SendMessageWidgetState extends State<SendMessageWidget> {
                           XFile? image = await picker.pickImage(
                               source: ImageSource.gallery);
 
-                          print(image!.path);
+                          if (image != null) {
+                            String imgUrl = await FireStorage()
+                                .sendImage(file: File(image.path));
+                            DataBase().sendMessage(msg: imgUrl);
+                          }
                         },
                         icon: const Icon(Icons.camera_alt),
                       ),

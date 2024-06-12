@@ -20,6 +20,14 @@ class MessageCard extends StatelessWidget {
     }
   }
 
+  bool isImage(String path) {
+    if (path.contains('https://')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -44,7 +52,9 @@ class MessageCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(message.message),
+                isImage(message.message)
+                    ? Image.network(message.message)
+                    : Text(message.message),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
