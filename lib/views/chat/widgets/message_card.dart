@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_chat_app/firebase/auth.dart';
 import 'package:material_chat_app/models/message.dart';
 
 class MessageCard extends StatelessWidget {
@@ -11,22 +12,28 @@ class MessageCard extends StatelessWidget {
   final bool isGroup;
   final Message message;
 
-  
+  bool isMyAcc() {
+    if (message.fromId == Auth.user.uid) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment:
-          index % 2 == 0 ? MainAxisAlignment.end : MainAxisAlignment.start,
+          isMyAcc() ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
         Card(
-          color: index % 2 != 0
-              ? Theme.of(context).colorScheme.background
-              : Theme.of(context).colorScheme.onPrimary,
+          color: isMyAcc()
+              ? Theme.of(context).colorScheme.tertiary
+              : Theme.of(context).colorScheme.tertiaryContainer,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(index % 2 != 0 ? 0 : 12),
-            bottomRight: Radius.circular(index % 2 == 0 ? 0 : 12),
+            bottomLeft: Radius.circular(!isMyAcc() ? 0 : 12),
+            bottomRight: Radius.circular(isMyAcc() ? 0 : 12),
             topLeft: const Radius.circular(12),
             topRight: const Radius.circular(12),
           )),
@@ -37,7 +44,7 @@ class MessageCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                index % 2 == 0
+                isMyAcc()
                     ? const SizedBox(
                         height: 0,
                       )
@@ -50,7 +57,7 @@ class MessageCard extends StatelessWidget {
                     const SizedBox(
                       width: 4,
                     ),
-                    index % 2 == 0
+                    isMyAcc()
                         ? const Icon(
                             Icons.done_all,
                             size: 15,
